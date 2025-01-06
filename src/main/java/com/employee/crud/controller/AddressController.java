@@ -3,6 +3,7 @@ package com.employee.crud.controller;
 import com.employee.crud.requestDto.AddressRequestDto;
 import com.employee.crud.responseDto.AddressResponseDto;
 import com.employee.crud.service.AddressService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class AddressController {
     private AddressService addressService;
 
     @PostMapping("/add")
-    public AddressResponseDto add(@RequestBody AddressRequestDto addressRequestDto) {
+    public AddressResponseDto add(@Valid @RequestBody AddressRequestDto addressRequestDto) {
         return addressService.add(addressRequestDto);
     }
 
@@ -30,7 +31,7 @@ public class AddressController {
     }
 
     @PutMapping("/update/{id}")
-    public AddressResponseDto update(@PathVariable int id, @RequestBody AddressRequestDto addressRequestDto) {
+    public AddressResponseDto update(@PathVariable int id, @Valid @RequestBody AddressRequestDto addressRequestDto) {
         return addressService.update(id, addressRequestDto);
     }
 

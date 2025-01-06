@@ -22,9 +22,12 @@ public class EmployeeRequestDto {
     private String email;
 
     @NotNull(message = "Number should not be null")
-    private Long phoneNo;
+    @Pattern(regexp = "^(\\+91)?[6-9]\\d{9}$", message = "Check the phone number")
+    private String phoneNo;
 
+    @NotNull(message = "Salary should not be empty")
     private double salary;
+
     private EmployeeGender gender;
 
     private List<AddressRequestDto> address;

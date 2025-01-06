@@ -16,7 +16,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("/add")
-    public EmployeeResponseDto add(@RequestBody @Valid EmployeeRequestDto requestDto) {
+    public EmployeeResponseDto add(@Valid @RequestBody EmployeeRequestDto requestDto) {
         return employeeService.add(requestDto);
     }
 
@@ -31,12 +31,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/addData")
-    public EmployeeResponseDto addWithAddress(@RequestBody EmployeeRequestDto requestDto){
+    public EmployeeResponseDto addWithAddress(@Valid @RequestBody EmployeeRequestDto requestDto){
         return employeeService.addWithAddress(requestDto);
     }
 
     @PutMapping("/update/{id}")
-    public EmployeeResponseDto update(@PathVariable int id, @RequestBody EmployeeRequestDto requestDto) {
+    public EmployeeResponseDto update(@PathVariable int id, @Valid @RequestBody EmployeeRequestDto requestDto) {
         return employeeService.update(id, requestDto);
     }
 

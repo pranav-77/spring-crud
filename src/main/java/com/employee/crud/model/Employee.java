@@ -24,7 +24,7 @@ public class Employee {
     private String email;
 
     @Column(unique = true)
-    private Long phoneNo;
+    private String phoneNo;
 
     private double salary;
 
