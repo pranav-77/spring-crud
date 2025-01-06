@@ -1,6 +1,7 @@
 package com.employee.crud.requestDto;
 
 import com.employee.crud.enumeration.EmployeeGender;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,5 +31,6 @@ public class EmployeeRequestDto {
 
     private EmployeeGender gender;
 
+    @Valid
     private List<AddressRequestDto> address;
 }
