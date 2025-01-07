@@ -14,7 +14,7 @@ public class EmployeeResponseDto {
     private int id;
     private String name;
     private String email;
-    private String phoneNo;
+    private List<String> phoneNo;
     private double salary;
     private EmployeeGender gender;
     private List<AddressResponseDto> address;

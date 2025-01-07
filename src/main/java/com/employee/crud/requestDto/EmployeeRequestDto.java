@@ -23,8 +23,7 @@ public class EmployeeRequestDto {
     private String email;
 
     @NotEmpty(message = "Number should not be null")
-    @Pattern(regexp = "^(\\+91)?[6-9]\\d{9}$", message = "Check the phone number")
-    private String phoneNo;
+    private List<@Pattern(regexp = "^(\\+91)?[6-9]\\d{9}$", message = "Check the phone number") String> phoneNo;
 
     @NotNull(message = "Salary should not be empty")
     @Min(value = 10000, message = "Should not be lesser than 10000")

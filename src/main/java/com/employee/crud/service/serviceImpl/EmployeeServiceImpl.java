@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -94,7 +93,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         responseDto.setName(employee.getName());
         responseDto.setEmail(employee.getEmail());
         responseDto.setSalary(employee.getSalary());
-        responseDto.setPhoneNo(String.valueOf(employee.getPhoneNo()));
+        responseDto.setPhoneNo(employee.getPhoneNo());
         responseDto.setGender(employee.getGender());
         responseDto.setAddress(mapToAddressResponse(employee.getAddresses()));
 
@@ -119,7 +118,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setName(requestDto.getName());
         employee.setEmail(requestDto.getEmail());
         employee.setSalary(requestDto.getSalary());
-        employee.setPhoneNo(Collections.singletonList(requestDto.getPhoneNo()));
+        employee.setPhoneNo(requestDto.getPhoneNo());
         employee.setGender(requestDto.getGender());
         return employee;
     }
