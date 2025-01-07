@@ -24,13 +24,15 @@ public class Employee {
     private String email;
 
     @Column(unique = true)
-    private String phoneNo;
+    @ElementCollection
+    @CollectionTable(name = "emp-num" , joinColumns = @JoinColumn(name = "emp-id"))
+    private List<String> phoneNo;
 
     private double salary;
 
     @Column(nullable = false)
     private EmployeeGender gender;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Address> addresses;
 }

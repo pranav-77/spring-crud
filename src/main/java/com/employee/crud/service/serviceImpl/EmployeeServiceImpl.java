@@ -9,13 +9,16 @@ import com.employee.crud.requestDto.EmployeeRequestDto;
 import com.employee.crud.responseDto.AddressResponseDto;
 import com.employee.crud.responseDto.EmployeeResponseDto;
 import com.employee.crud.service.EmployeeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
+@Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -28,17 +31,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeResponseDto add(EmployeeRequestDto requestDto) {
         Employee employee = mapToEntity(requestDto);
         employee = employeeRepository.save(employee);
+        log.info("Adding Data");
         return mapToResponse(employee);
     }
 
     @Override
     public EmployeeResponseDto getById(int id) {
         Employee employee = employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundByIdException("No details found"));
+        log.info("Getting data by id");
         return mapToResponse(employee);
     }
 
     @Override
     public List<EmployeeResponseDto> list() {
+        log.info("Getting list of employees");
         return employeeRepository.findAll()
                 .stream()
                 .map(this::mapToResponse)
@@ -54,6 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (ObjectOptimisticLockingFailureException e) {
             throw new EmployeeNotFoundByIdException("No Details found");
         }
+        log.info("Updating data");
         return mapToResponse(employee);
     }
 
@@ -70,13 +77,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         emp.setAddresses(addresses);
         employeeRepository.save(emp);
         addressRepository.saveAll(addresses);
-
+        log.info("Adding data with address");
         return mapToResponse(emp);
     }
 
     @Override
     public void delete(int id) {
         employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundByIdException("Employee not found in given id"));
+        log.info("Deleting data");
         employeeRepository.deleteById(id);
     }
 
@@ -86,7 +94,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         responseDto.setName(employee.getName());
         responseDto.setEmail(employee.getEmail());
         responseDto.setSalary(employee.getSalary());
-        responseDto.setPhoneNo(employee.getPhoneNo());
+        responseDto.setPhoneNo(String.valueOf(employee.getPhoneNo()));
         responseDto.setGender(employee.getGender());
         responseDto.setAddress(mapToAddressResponse(employee.getAddresses()));
 
@@ -111,9 +119,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setName(requestDto.getName());
         employee.setEmail(requestDto.getEmail());
         employee.setSalary(requestDto.getSalary());
-        employee.setPhoneNo(requestDto.getPhoneNo());
+        employee.setPhoneNo(Collections.singletonList(requestDto.getPhoneNo()));
         employee.setGender(requestDto.getGender());
-
         return employee;
     }
 }
