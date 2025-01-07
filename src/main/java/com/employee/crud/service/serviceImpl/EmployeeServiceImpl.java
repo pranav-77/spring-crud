@@ -28,7 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeResponseDto add(EmployeeRequestDto requestDto) {
         Employee employee = mapToEntity(requestDto);
         employee = employeeRepository.save(employee);
-
         return mapToResponse(employee);
     }
 
@@ -105,8 +104,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             addressResponseDto.setState(e.getState());
             return addressResponseDto;
         }).toList();
-
-
     }
 
     private Employee mapToEntity(EmployeeRequestDto requestDto) {

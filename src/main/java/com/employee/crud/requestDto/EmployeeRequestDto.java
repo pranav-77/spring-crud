@@ -14,19 +14,21 @@ import java.util.List;
 @NoArgsConstructor
 public class EmployeeRequestDto {
 
-    @NotBlank(message = "Name should not be empty")
+    @NotEmpty(message = "Name should not be empty")
     @Pattern(regexp = "^[A-Za-z]+(?: [A-Za-z]+)*$", message = "Name should contains only letters")
     private String name;
 
-    @NotBlank(message = "Email should not be empty")
+    @NotEmpty(message = "Email should not be empty")
     @Email(message = "Invalid Email Format")
     private String email;
 
-    @NotNull(message = "Number should not be null")
+    @NotEmpty(message = "Number should not be null")
     @Pattern(regexp = "^(\\+91)?[6-9]\\d{9}$", message = "Check the phone number")
     private String phoneNo;
 
     @NotNull(message = "Salary should not be empty")
+    @Min(value = 10000, message = "Should not be lesser than 10000")
+    @Max(value = 100000, message = "Should not be greater than 100000")
     private double salary;
 
     private EmployeeGender gender;
