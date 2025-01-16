@@ -78,6 +78,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         addressRepository.saveAll(addresses);
         log.info("Adding data with address");
         return mapToResponse(emp);
+
+       /* List<Address> addresses = requestDto.getAddress().stream().map(e -> {
+            Address address = new Address();
+            address.setStreet(e.getStreet());
+            address.setCity(e.getCity());
+            address.setState(e.getState());
+            address.setEmployee(emp);
+            return address;
+        }).toList();
+
+        emp.setAddresses(addresses);
+
+        employeeRepository.save(emp);
+        addressRepository.saveAll(addresses);
+
+        log.info("Adding data with address");
+
+        return mapToResponse(emp); */
     }
 
     @Override

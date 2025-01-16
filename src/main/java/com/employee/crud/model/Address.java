@@ -1,5 +1,6 @@
 package com.employee.crud.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +22,6 @@ public class Address {
     private String state;
 
     @ManyToOne
+    @JsonBackReference
     private Employee employee;
 }

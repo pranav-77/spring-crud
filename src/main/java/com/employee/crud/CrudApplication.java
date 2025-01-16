@@ -12,5 +12,4 @@ public class CrudApplication {
 		SpringApplication.run(CrudApplication.class, args);
 		log.info("Main Application started");
 	}
-
 }

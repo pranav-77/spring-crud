@@ -1,6 +1,8 @@
 package com.employee.crud.model;
 
 import com.employee.crud.enumeration.EmployeeGender;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,5 +36,6 @@ public class Employee {
     private EmployeeGender gender;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Address> addresses;
 }
